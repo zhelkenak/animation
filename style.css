@@ -1,0 +1,335 @@
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+RACES SECTION
+========================= */
+
+.race-container{
+    display:flex;
+    flex-direction:column;
+    gap:120px;
+}
+
+.race-card{
+    display:flex;
+    align-items:center;
+    gap:60px;
+    position:relative;
+    min-height:500px;
+}
+
+.race-right{
+    flex-direction:row-reverse;
+}
+
+.race-image{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+    border-radius:30px;
+    transform-style:preserve-3d;
+    perspective:1000px;
+}
+
+.race-image img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    transition:1s;
+    animation:slowZoom 10s infinite alternate;
+}
+
+.race-image::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+        45deg,
+        rgba(255,0,60,0.4),
+        rgba(0,229,255,0.2)
+    );
+    z-index:2;
+    mix-blend-mode:screen;
+    animation:gradientMove 6s infinite linear;
+}
+
+.race-image:hover img{
+    transform:
+        scale(1.15)
+        rotate(2deg);
+    filter:
+        saturate(1.5)
+        contrast(1.2);
+}
+
+.race-info{
+    flex:1;
+    position:relative;
+    padding:40px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    border-radius:30px;
+
+    animation:
+        glassFloat 5s infinite ease-in-out;
+}
+
+.race-number{
+    position:absolute;
+    top:-50px;
+    right:20px;
+    font-size:120px;
+    font-weight:bold;
+    color:rgba(255,255,255,0.05);
+
+    animation:
+        pulse 4s infinite;
+}
+
+.race-info h3{
+    font-size:50px;
+    margin-bottom:20px;
+
+    animation:
+        neonText 3s infinite alternate;
+}
+
+.race-info p{
+    font-size:20px;
+    line-height:1.8;
+    opacity:0.9;
+}
+
+.race-stats{
+    margin-top:40px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.stat{
+    flex:1;
+    min-width:120px;
+    padding:25px;
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    text-align:center;
+    transition:0.5s;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+    );
+
+    transform:translateX(-100%);
+}
+
+.stat:hover::before{
+    animation:shine 1s;
+}
+
+.stat:hover{
+    transform:
+        translateY(-10px)
+        scale(1.05);
+    box-shadow:
+        0 0 30px rgba(0,229,255,0.3);
+}
+
+.stat h4{
+    font-size:28px;
+    color:var(--blue);
+}
+
+.stat span{
+    font-size:14px;
+    opacity:0.7;
+}
+
+/* =========================
+EXTRA INTERFACE IMAGES
+========================= */
+
+.interface-decor{
+    position:absolute;
+    z-index:10;
+    pointer-events:none;
+}
+
+.interface-1{
+    top:10%;
+    left:5%;
+    width:120px;
+
+    animation:
+        rotate360 15s linear infinite,
+        float 5s infinite ease-in-out;
+}
+
+.interface-2{
+    bottom:10%;
+    right:5%;
+    width:180px;
+
+    animation:
+        levitate 6s infinite ease-in-out,
+        pulseGlow 3s infinite;
+}
+
+.interface-3{
+    top:50%;
+    right:10%;
+    width:100px;
+
+    animation:
+        shakeFast 1s infinite,
+        flicker 2s infinite;
+}
+
+/* =========================
+KEYFRAMES
+========================= */
+
+@keyframes slowZoom{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.1);
+    }
+}
+
+@keyframes glassFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+        opacity:0.1;
+    }
+    50%{
+        transform:scale(1.1);
+        opacity:0.2;
+    }
+}
+
+@keyframes neonText{
+    from{
+        text-shadow:
+        0 0 10px var(--red),
+        0 0 20px var(--red);
+    }
+    to{
+        text-shadow:
+        0 0 20px var(--blue),
+        0 0 40px var(--blue);
+    }
+}
+
+@keyframes shine{
+    100%{
+        transform:translateX(200%);
+    }
+}
+
+@keyframes rotate360{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes levitate{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-30px);
+    }
+}
+
+@keyframes pulseGlow{
+    0%,100%{
+        filter:drop-shadow(0 0 10px var(--blue));
+    }
+    50%{
+        filter:drop-shadow(0 0 30px var(--red));
+    }
+}
+
+@keyframes shakeFast{
+    0%,100%{
+        transform:translateX(0);
+    }
+    25%{
+        transform:translateX(-3px);
+    }
+    75%{
+        transform:translateX(3px);
+    }
+}
+
+@keyframes flicker{
+    0%,19%,21%,23%,25%,54%,56%,100%{
+        opacity:1;
+    }
+    20%,24%,55%{
+        opacity:0.4;
+    }
+}
+
+@keyframes gradientMove{
+    0%{
+        transform:translateX(-20%);
+    }
+    100%{
+        transform:translateX(20%);
+    }
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+.race-card{
+    flex-direction:column;
+}
+
+.race-right{
+    flex-direction:column;
+}
+
+.race-info h3{
+    font-size:35px;
+}
+
+.race-number{
+    font-size:80px;
+}
+
+}
